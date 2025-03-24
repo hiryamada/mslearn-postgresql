@@ -1,10 +1,6 @@
-# PostgreSQL Exercises
-
-This repository contains the instructions and files to support PostgreSQL exercises in [Microsoft Learn](https://learn.microsoft.com) modules.
-
 # How to start
 
-Start lab, run Windows terminal, and run this in it:
+Start lab VM, run Windows terminal. Copy below and paste in the terminal.
 
 ```pwsh
 # Sign in to Azure
@@ -22,7 +18,7 @@ Expand-Archive -LiteralPath $zipPath
 cd $folder/mslearn-postgresql-main
 ```
 
-OK! Type the command below to start labs (NN is 12 to 19)
+Ok, type the command below to start labs (NN will be from 12 to 19 in this course, but currently only 12 is available)
 
 ```pwsh
 pwsh labNN.ps1
