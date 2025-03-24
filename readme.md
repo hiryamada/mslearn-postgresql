@@ -9,7 +9,6 @@ Start lab, run Windows terminal, and run this in it:
 ```pwsh
 Write-Host "Sign in to Azure"
 az login
-Write-Host "Press Enter to continue:" -NoNewline; Read-Host
 
 Write-Host "Download and extract lab files..."
 $url = "https://github.com/hiryamada/mslearn-postgresql/archive/refs/heads/main.zip"
