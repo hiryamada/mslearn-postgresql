@@ -50,5 +50,3 @@ ExecuteQuery "SELECT azure_ai.set_setting('azure_cognitive.subscription_key', '$
 
 Step 'Analyze sentiment'
 ExecuteQuery "SELECT id, comments, azure_cognitive.analyze_sentiment(comments, 'en') AS sentiment FROM reviews WHERE id in (1, 3)"
-
-# END
