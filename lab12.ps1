@@ -25,8 +25,8 @@ ExecuteQuery "CREATE TABLE listings (id int, name varchar(100), description text
 ExecuteQuery "CREATE TABLE reviews (id int, listing_id int, date date, comments text)"  
 
 Step 'Copy data into tables'
-ExecuteQuery "\COPY listings FROM 'main/mslearn-postgresql-main/Allfiles/Labs/Shared/listings.csv' CSV HEADER"
-ExecuteQuery "\COPY reviews FROM 'main/mslearn-postgresql-main/Allfiles/Labs/Shared/reviews.csv' CSV HEADER"
+ExecuteQuery "\COPY listings FROM 'Allfiles/Labs/Shared/listings.csv' CSV HEADER"
+ExecuteQuery "\COPY reviews FROM 'Allfiles/Labs/Shared/reviews.csv' CSV HEADER"
 
 Step 'Enable azure_ai extension'
 ExecuteQuery "CREATE EXTENSION IF NOT EXISTS azure_ai"
