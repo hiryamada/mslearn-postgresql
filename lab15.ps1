@@ -28,7 +28,7 @@ Step 'Deploy Azure resources. this will take approximately 5 minutes to complete
 
 Step 'Define a function to send a SQL query using psql' {
 	$Global:POSTGRES_FQDN = az postgres flexible-server list --query '[].fullyQualifiedDomainName' -o tsv
-	Function ExecuteQuery { param([string]$Query) psql -U pgAdmin -h $POSTGRES_FQDN -d rentals -c $Query }	
+	Function Global:ExecuteQuery { param([string]$Query) psql -U pgAdmin -h $POSTGRES_FQDN -d rentals -c $Query }	
 }
 
 Step 'Create tables' {
@@ -61,6 +61,11 @@ Step 'Set endpoint and key for Azure OpenAI' {
 	ExecuteQuery "SELECT azure_ai.set_setting('azure_openai.subscription_key', '$AOAI_KEY')"
 }
 
+Step 'Set endpoint and key for Azure AI Language' {
+	ExecuteQuery "SELECT azure_ai.set_setting('azure_cognitive.endpoint', '$LANG_ENDPOINT')"
+	ExecuteQuery "SELECT azure_ai.set_setting('azure_cognitive.subscription_key', '$AOAI_KEY')"
+}
+
 Step 'Add vector column to listings table' {
 	ExecuteQuery "ALTER TABLE listings ADD COLUMN listing_vector vector(1536);"
 }
@@ -84,7 +89,7 @@ Step 'Add summary column to listings table' {
 }
 
 Step 'Create summaries for all the existing properties in the database' {
-	psql -U pgAdmin -h $POSTGRES_FQDN -d rentals -f .\lab14_recommended_listing.sql
+	psql -U pgAdmin -h $POSTGRES_FQDN -d rentals -f .\lab15_cte.sql
 }
 
 Step 'View the summaries written into the listings table' {
