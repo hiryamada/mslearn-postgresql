@@ -54,7 +54,7 @@ ExecuteQuery "UPDATE listings SET listing_vector = azure_openai.create_embedding
 ############# lab 14 original steps #############
 
 Step 'Create recommended_listing function'
-psql -U pgAdmin -h $POSTGRES_FQDN -d rentals -f .\recommended_listing.sql
+psql -U pgAdmin -h $POSTGRES_FQDN -d rentals -f .\lab14_recommended_listing.sql
 
 Step 'search for 20 listing recommendations closest to a listing'
 ExecuteQuery "select out_listingName, out_score from recommend_listing( (SELECT id from listings limit 1), 20);"
