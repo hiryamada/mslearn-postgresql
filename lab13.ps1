@@ -30,7 +30,7 @@ ExecuteQuery "\COPY reviews FROM 'Allfiles/Labs/Shared/reviews.csv' CSV HEADER"
 
 ############# lab 13 original steps #############
 
-Step 'Enable azure_ai extension'
+Step 'Enable vector extension'
 ExecuteQuery "CREATE EXTENSION vector;"
 
 Step 'Enable azure_ai extension'

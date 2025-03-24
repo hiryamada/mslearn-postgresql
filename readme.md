@@ -18,7 +18,7 @@ Expand-Archive -LiteralPath $zipPath
 cd $folder/mslearn-postgresql-main
 ```
 
-Ok, type the command below to start labs (NN will be from 12 to 19 in this course, but currently only 12 is available)
+Ok, type the command below to start labs (NN will be from 12 to 19 in this course, but currently only 12 and 13 is available)
 
 ```pwsh
 pwsh labNN.ps1
