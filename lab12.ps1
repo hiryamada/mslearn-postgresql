@@ -12,15 +12,13 @@ $REGION = "eastus"
 $RG_NAME = "rg-learn-postgresql-ai-$REGION"
 az group create --name $RG_NAME --location $REGION
 
-Step 'Generate password for postgres admin user'
-$env:PGPASSWORD = -join ((48..57 + 65..90 + 97..122) | Get-Random -Count 18 | ForEach-Object {[char]$_})  
-
 Step 'Deploy Azure resources. this will take approximately 5 minutes to complete.
-az deployment group create -g $RG_NAME --template-file .\$folder\mslearn-postgresql-main\Allfiles\Labs\Shared\deploy.bicep --parameters restore=false adminLogin=pgAdmin adminLoginPassword=$env:PGPASSWORD
+$env:PGPASSWORD = -join ((48..57 + 65..90 + 97..122) | Get-Random -Count 18 | ForEach-Object {[char]$_})  
+az deployment group create -g $RG_NAME --template-file .\Allfiles\Labs\Shared\deploy.bicep --parameters restore=false adminLogin=pgAdmin adminLoginPassword=$env:PGPASSWORD
 
 Step 'Define a function to send a SQL query using psql'
-$SERVER_FQDN = az postgres flexible-server list --query '[].fullyQualifiedDomainName' -o tsv
-Function ExecuteQuery { param([string]$Query) psql -U pgAdmin -h $SERVER_FQDN -d rentals -c $Query }
+$POSTGRES_FQDN = az postgres flexible-server list --query '[].fullyQualifiedDomainName' -o tsv
+Function ExecuteQuery { param([string]$Query) psql -U pgAdmin -h $POSTGRES_FQDN -d rentals -c $Query }
 
 Step 'Create tables'
 ExecuteQuery "CREATE TABLE listings (id int, name varchar(100), description text, property_type varchar(25), room_type varchar(30), price numeric, weekly_price numeric)"  
