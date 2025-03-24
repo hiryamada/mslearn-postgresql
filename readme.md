@@ -19,7 +19,7 @@ $zipPath = "$folder.zip"
 Expand-Archive -LiteralPath $zipPath
 
 Write-Host "change current directory to lab folder..."
-cd $folder
+cd $folder/mslearn-postgresql-main
 
 Write-Host "Ok, please use command below to start labs (NN is 12 to 19)"
 Write-Host "pwsh labNN.ps1"
