@@ -7,17 +7,6 @@ Function Step {
 	Read-Host
 }
 
-Step 'Sign in to Azure using Azure CLI'
-az login
-
-Step 'Download source codes'
-$url = "https://github.com/hiryamada/mslearn-postgresql/archive/refs/heads/main.zip"
-$currentTime = (Get-Date).ToString("HHmmss")
-$folder = "lab12-$currentTime"
-$zipPath = "$folder.zip"
-(New-Object System.Net.WebClient).DownloadFile($url, $zipPath)
-Expand-Archive -LiteralPath $zipPath
-
 Step 'Create resource group'
 $REGION = "eastus"
 $RG_NAME = "rg-learn-postgresql-ai-$REGION"
