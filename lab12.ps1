@@ -12,7 +12,7 @@ $REGION = "eastus"
 $RG_NAME = "rg-learn-postgresql-ai-$REGION"
 az group create --name $RG_NAME --location $REGION
 
-Step 'Deploy Azure resources. this will take approximately 5 minutes to complete.
+Step 'Deploy Azure resources. this will take approximately 5 minutes to complete.'
 $env:PGPASSWORD = -join ((48..57 + 65..90 + 97..122) | Get-Random -Count 18 | ForEach-Object {[char]$_})  
 az deployment group create -g $RG_NAME --template-file .\Allfiles\Labs\Shared\deploy.bicep --parameters restore=false adminLogin=pgAdmin adminLoginPassword=$env:PGPASSWORD
 
