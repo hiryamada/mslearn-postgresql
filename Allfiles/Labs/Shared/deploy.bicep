@@ -19,9 +19,6 @@ param adminLoginPassword string
 @description('Unique name for the Azure OpenAI service.')
 param azureOpenAIServiceName string = 'oai-learn-${resourceGroup().location}-${uniqueString(resourceGroup().id)}'
 
-@description('Unique name for the Azure AI Language service account.')
-param languageServiceName string = 'lang-learn-${resourceGroup().location}-${uniqueString(resourceGroup().id)}'
-
 @description('Restore the service instead of creating a new instance. This is useful if you previously soft-delted the service and want to restore it. If you are restoring a service, set this to true. Otherwise, leave this as false.')
 param restore bool = false
 
@@ -103,7 +100,7 @@ resource allowlistExtensions 'Microsoft.DBforPostgreSQL/flexibleServers/configur
 resource azureOpenAIService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: azureOpenAIServiceName
   location: location
-  kind: 'OpenAI'
+  kind: 'AIServices'
   sku: {
     name: 'S0'
     tier: 'Standard'
@@ -132,20 +129,6 @@ resource azureOpenAIEmbeddingDeployment 'Microsoft.CognitiveServices/accounts/de
   }
 }
 
-@description('Creates an Azure AI Language service account.')
-resource languageService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
-  name: languageServiceName
-  location: location
-  kind: 'TextAnalytics'
-  sku: {
-    name: 'S'
-  }
-  properties: {
-    customSubDomainName: languageServiceName
-    publicNetworkAccess: 'Enabled'
-    restore: restore
-  } 
-}
 
 output serverFqdn string = postgreSQLFlexibleServer.properties.fullyQualifiedDomainName
 output serverName string = postgreSQLFlexibleServer.name
@@ -154,6 +137,3 @@ output databaseName string = rentalsDatabase.name
 output azureOpenAIServiceName string = azureOpenAIService.name
 output azureOpenAIEndpoint string = azureOpenAIService.properties.endpoint
 output azureOpenAIEmbeddingDeploymentName string = azureOpenAIEmbeddingDeployment.name
-
-output languageServiceName string = languageService.name
-output languageServiceEndpoint string = languageService.properties.endpoint
